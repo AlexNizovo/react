@@ -35,15 +35,26 @@ function App() {
     ]))
   }
   
+function renameTodo (title, id, completed) {
+  let tiTle = prompt('редактируй',title)
+  setTodos(todos.concat([
+    {
+      title: tiTle,
+      completed,
+      id
+    }
+  ]))
+  
 
+}
 
 
   return (
     <Context.Provider value={{removeTodo}}>
       <div className="App">
         <h1>Список дел</h1>
-        <AddTodo  onCreate={addTodo}/>
-        {todos.length ? <TodoList  todos={todos}  onToggle={toggleTodo}/> : <p>Нет запланированных дел</p>}
+        <AddTodo  onCreate={addTodo} />
+        {todos.length ? <TodoList  todos={todos}  onToggle={toggleTodo} onRename={renameTodo}/> : <p>Нет запланированных дел</p>}
       
       </div>
     </Context.Provider>

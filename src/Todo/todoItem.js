@@ -26,7 +26,7 @@ const styles = {
   }
 
 
-function TodoItem ({todo, onChange}) {
+function TodoItem ({todo, onToggle, onRename}) {
     const {removeTodo} = useContext(Context)
 
     const classes =[]
@@ -35,11 +35,7 @@ function TodoItem ({todo, onChange}) {
         classes.push('done')
     }
 
-function renameTodo({todo}) {
-    const setVal = prompt('редактируйте', todo)
-     return console.log(setVal)
-} 
-    
+
     return(
         <li style ={styles.li} >
             <span>
@@ -47,11 +43,11 @@ function renameTodo({todo}) {
                 type='checkbox' 
                 checked={todo.completed}
                 style={styles.input} 
-                onChange={ ()=> onChange(todo.id)}/>
+                onChange={ ()=> onToggle(todo.id)}/>
             </span>
                 <span className={classes.join(' ')}>{todo.title}</span>     
                 <span style={{marginLeft: '.9rem', display:'flex'}}>
-                    <button onClick={() =>renameTodo(todo)}>Редактировать</button>
+                    <button onClick={() =>onRename(todo.title, todo.id,todo.completed)}>Редактировать</button>
                     <button onClick={removeTodo.bind(null, todo.id) }>&times; </button>
                 </span>
         </li>
@@ -61,8 +57,8 @@ function renameTodo({todo}) {
 
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired, 
-    // renameTodo: PropTypes.func.isRequired,
+    onToggle: PropTypes.func.isRequired, 
+    onRename: PropTypes.func.isRequired,
 }
 
 export default TodoItem
