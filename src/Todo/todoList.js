@@ -17,7 +17,8 @@ function TodoList (props) {
                 todo={todo} 
                 key={todo.id} 
                 onToggle={props.onToggle}
-                onRename={props.onRename}/>
+                onRename={props.onRename}
+                onRemoveTodo={props.onRemoveTodo}/>
             })}
         </ul> 
         
@@ -27,7 +28,8 @@ function TodoList (props) {
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.object).isRequired,
     onToggle: PropTypes.func.isRequired,
-    onRename: PropTypes.func.isRequired
+    onRename: PropTypes.func.isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
 }
 
 export default TodoList

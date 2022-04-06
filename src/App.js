@@ -1,7 +1,7 @@
 import React from "react";
 import AddTodo from "./Todo/inpText";
 import TodoList from './Todo/todoList';
-import Context from "./Todo/context";
+import { paste } from "@testing-library/user-event/dist/paste";
 
 
 function App() {
@@ -21,12 +21,12 @@ function App() {
     }))
   }
 
-  function removeTodo(id) {
+  function removeTodo(id) { //удаляет todo
     setTodos(todos.filter(todo => todo.id !== id ))
   }
 
-  function addTodo(title) {
-    setTodos(todos.concat([
+  function addTodo(title) { //добавляет todo
+      setTodos(todos.concat([
       {
         title,
         completed: false,
@@ -35,29 +35,26 @@ function App() {
     ]))
   }
   
-function renameTodo (title, id, completed) {
-  let tiTle = prompt('редактируй',title)
-  setTodos(todos.concat([
-    {
-      title: tiTle,
-      completed,
-      id
-    }
-  ]))
-  
-
+function renameTodo (title, id) {  // редактирует
+  const newTitle = todos.map((todos) => ({
+    ...todos,
+    title: todos.id === id ? prompt('редактируй',title) : todos.title
+  }));
+  setTodos(newTitle)
 }
 
 
   return (
-    <Context.Provider value={{removeTodo}}>
-      <div className="App">
-        <h1>Список дел</h1>
-        <AddTodo  onCreate={addTodo} />
-        {todos.length ? <TodoList  todos={todos}  onToggle={toggleTodo} onRename={renameTodo}/> : <p>Нет запланированных дел</p>}
-      
-      </div>
-    </Context.Provider>
+    <div className="App">
+      <h1>Список дел</h1>
+      <AddTodo  onCreate={addTodo} />
+      {todos.length ? <TodoList  
+      todos={todos}  
+      onToggle={toggleTodo} 
+      onRename={renameTodo}
+      onRemoveTodo={removeTodo}
+      /> : <p>Нет запланированных дел</p>}
+    </div>
   );
 }
 

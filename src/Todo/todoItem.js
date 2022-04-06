@@ -1,7 +1,6 @@
-import react, {useContext, useState} from "react";
+import react, {useState} from "react";
 import PropTypes from "prop-types";
 import { findByLabelText } from "@testing-library/react";
-import Context from "./context";
 import AddTodo from "./inpText";
 import TodoList from "./todoList";
 
@@ -26,8 +25,8 @@ const styles = {
   }
 
 
-function TodoItem ({todo, onToggle, onRename}) {
-    const {removeTodo} = useContext(Context)
+function TodoItem ({todo, onToggle, onRename, onRemoveTodo}) {
+    // const {removeTodo} = useContext(Context)
 
     const classes =[]
 
@@ -47,8 +46,8 @@ function TodoItem ({todo, onToggle, onRename}) {
             </span>
                 <span className={classes.join(' ')}>{todo.title}</span>     
                 <span style={{marginLeft: '.9rem', display:'flex'}}>
-                    <button onClick={() =>onRename(todo.title, todo.id,todo.completed)}>Редактировать</button>
-                    <button onClick={removeTodo.bind(null, todo.id) }>&times; </button>
+                    <button onClick={() =>onRename(todo.title, todo.id)}>Редактировать</button>
+                    <button onClick={() => onRemoveTodo(todo.id) }>&times; </button>
                 </span>
         </li>
     ) 
@@ -59,6 +58,7 @@ TodoItem.propTypes = {
     todo: PropTypes.object.isRequired,
     onToggle: PropTypes.func.isRequired, 
     onRename: PropTypes.func.isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
 }
 
 export default TodoItem
