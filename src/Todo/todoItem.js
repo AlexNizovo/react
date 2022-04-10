@@ -1,8 +1,8 @@
 import react, {useState} from "react";
 import PropTypes from "prop-types";
-import { findByLabelText } from "@testing-library/react";
 import AddTodo from "./inpText";
 import TodoList from "./todoList";
+import Modal from "../modal/modal";
 
 
 const styles = {
@@ -19,21 +19,26 @@ const styles = {
     },
     input: {
       marginRight: '1rem',
-      
     },
    
   }
 
 
-function TodoItem ({todo, onToggle, onRename, onRemoveTodo}) {
-    // const {removeTodo} = useContext(Context)
+function TodoItem ({todo, onToggle, onRename, onRemoveTodo,}) {
 
     const classes =[]
 
-    if(todo.completed) {
+    if(todo.completed) {     // зачеркивает текст , если поставили флажок 
         classes.push('done')
     }
 
+    const[activeModal, setActiveModal] = useState(false) // на открытие и закртие модалки
+
+        const[name,setName] = useState('')  // input в модалке
+        function handlNameChange(name) {
+            setName(name)
+        }
+        
 
     return(
         <li style ={styles.li} >
@@ -46,9 +51,17 @@ function TodoItem ({todo, onToggle, onRename, onRemoveTodo}) {
             </span>
                 <span className={classes.join(' ')}>{todo.title}</span>     
                 <span style={{marginLeft: '.9rem', display:'flex'}}>
-                    <button onClick={() =>onRename(todo.title, todo.id)}>Редактировать</button>
-                    <button onClick={() => onRemoveTodo(todo.id) }>&times; </button>
+                    <button onClick={()=> setActiveModal(true)}>Редактировать</button>
+                    <button className='delete' onClick={() => onRemoveTodo(todo.id) }>&times; </button>
                 </span>
+                <Modal 
+                    active={activeModal} 
+                    setActive={setActiveModal} 
+                    onRename={() => onRename(todo.title, todo.id,name)} 
+                    onChange={handlNameChange}
+                    nameT={todo.title}
+                    />
+
         </li>
     ) 
 }

@@ -18,7 +18,8 @@ function TodoList (props) {
                 key={todo.id} 
                 onToggle={props.onToggle}
                 onRename={props.onRename}
-                onRemoveTodo={props.onRemoveTodo}/>
+                onRemoveTodo={props.onRemoveTodo}
+                />
             })}
         </ul> 
         

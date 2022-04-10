@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./modal/modal";
 import AddTodo from "./Todo/inpText";
 import TodoList from './Todo/todoList';
-import { paste } from "@testing-library/user-event/dist/paste";
+
 
 
 function App() {
@@ -35,13 +36,13 @@ function App() {
     ]))
   }
   
-function renameTodo (title, id) {  // редактирует
-  const newTitle = todos.map((todos) => ({
-    ...todos,
-    title: todos.id === id ? prompt('редактируй',title) : todos.title
-  }));
-  setTodos(newTitle)
-}
+  function renameTodo (title, id, name) {  // редактирует
+    const newTitle = todos.map((todos) => ({
+      ...todos,
+      title: todos.id === id ? name : todos.title
+    }));
+    setTodos(newTitle)
+  }
 
 
   return (
@@ -49,12 +50,14 @@ function renameTodo (title, id) {  // редактирует
       <h1>Список дел</h1>
       <AddTodo  onCreate={addTodo} />
       {todos.length ? <TodoList  
-      todos={todos}  
-      onToggle={toggleTodo} 
-      onRename={renameTodo}
-      onRemoveTodo={removeTodo}
-      /> : <p>Нет запланированных дел</p>}
+          todos={todos}  
+          onToggle={toggleTodo} 
+          onRename={renameTodo}
+          onRemoveTodo={removeTodo}
+          /> : <p>Нет запланированных дел</p>
+      }     
     </div>
+    
   );
 }
 
