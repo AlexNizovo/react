@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import './modal.css';
 
 
-function Modal({active, setActive, onRename, onChange, nameT}) {
 
-    
+function Modal({active, setActive, onCreate, title}) {
+
+    const[name,setName] = useState('')     // input в модалке
+
     function handlerInp (event)  {
         event.preventDefault()                  // при нажатии на кнопку не перезагружает страницу
-        onChange(event.target.value)
+        onCreate(name)                          // редактирует todo через инпут модалки
     }
     
 
@@ -18,11 +20,9 @@ function Modal({active, setActive, onRename, onChange, nameT}) {
             <div className='modal_body' onClick={e => e.stopPropagation()}>
                 <h1>Редактируй</h1>
                 <form onSubmit={handlerInp}> 
-                    <input 
-                        type='text'  value={nameT}
+                    <input value={name || title} onChange={event => setName(event.target.value)}
+                        type='text'  
                         className='inp' 
-                        onChange={handlerInp} 
-                        onInput={onRename}
                     ></input>
                     <button 
                         type='submit' 

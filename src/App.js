@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "./modal/modal";
 import AddTodo from "./Todo/inpText";
 import TodoList from './Todo/todoList';
+import './index.css'
 
 
 
