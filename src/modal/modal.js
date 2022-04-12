@@ -6,7 +6,7 @@ import './modal.css';
 
 function Modal({active, setActive, onCreate, title}) {
 
-    const[name,setName] = useState('')     // input в модалке
+    const[name,setName] = useState(title)     // input в модалке
 
     function handlerInp (event)  {
         event.preventDefault()                  // при нажатии на кнопку не перезагружает страницу
@@ -20,7 +20,7 @@ function Modal({active, setActive, onCreate, title}) {
             <div className='modal_body' onClick={e => e.stopPropagation()}>
                 <h1>Редактируй</h1>
                 <form onSubmit={handlerInp}> 
-                    <input value={name || title} onChange={event => setName(event.target.value)}
+                    <input  value={name} onChange={event => setName(event.target.value)}
                         type='text'  
                         className='inp' 
                     ></input>
