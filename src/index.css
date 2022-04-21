@@ -5,9 +5,38 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:  #eaf7dc url('orochi.jpg')  ;
+  background-attachment: fixed;
+  background-size: 100%;
+  color: rgb(231, 238, 28);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 10px;
+  
+}
+
+.done {
+  text-decoration: line-through ;
+}
+
+button, input {
+  background-color: rgba(255, 255, 255, 0.296);
+  border-radius: 5px;
+  color: #342404e1;
+}
+.delete {
+  background-color: rgba(123, 11, 11, 0.826);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+

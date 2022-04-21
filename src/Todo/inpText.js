@@ -1,0 +1,33 @@
+import React, { useState } from "react";
+import PropTypes from 'prop-types'
+import './todo.css'
+
+
+function AddTodo({onCreate}) {
+    const [value, setValue] = useState('')
+
+    function SubmitHendler(event) {
+        event.preventDefault()
+
+        if(value.trim()) {
+            onCreate(value)
+            setValue('')
+        }
+    }
+
+    return(
+        <form onSubmit={SubmitHendler}>
+            <input type='text' value={value} onChange={ event => setValue(event.target.value)} ></input>
+            <button type='submit'>Добавить
+            </button>
+        </form>
+        
+    )
+}
+
+AddTodo.propTypes = {
+    onCreate: PropTypes.func.isRequired
+}
+
+
+export default AddTodo

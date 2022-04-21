@@ -1,0 +1,29 @@
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: .5rem;
+    text-align: justify;
+    margin-right: .7 rem;
+  }
+  input {
+    margin-right: 1rem;
+  }
+
+  .sp {
+    margin-left: .9rem;
+    display: flex;
+  }
+
+  form {
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
